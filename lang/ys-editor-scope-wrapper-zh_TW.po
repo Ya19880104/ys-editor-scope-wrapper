@@ -1,0 +1,107 @@
+# YS Editor Scope Wrapper - 繁體中文 (zh_TW)
+# Copyright (C) 2026 YANGSHEEP DESIGN
+# This file is distributed under the same license as the YS Editor Scope Wrapper plugin.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YS Editor Scope Wrapper 1.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-26 12:00+0800\n"
+"PO-Revision-Date: 2026-05-26 12:00+0800\n"
+"Last-Translator: YANGSHEEP DESIGN\n"
+"Language-Team: YANGSHEEP DESIGN <hi@yangsheep.com.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: hand-written\n"
+"X-Domain: ys-editor-scope-wrapper\n"
+
+msgid "YS Editor Scope Wrapper"
+msgstr "YS 編輯器作用域包裝"
+
+msgid "YS Editor Scope"
+msgstr "YS 編輯器作用域"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Settings saved."
+msgstr "設定已儲存。"
+
+msgid "Re-detection complete."
+msgstr "重新偵測完成。"
+
+msgid "This plugin applies the selected CSS classes to the Block Editor wrapper (and iframe canvas body), so wrapper-scoped CSS that only exists on the frontend also works inside the editor preview."
+msgstr "此外掛將勾選的 CSS class 套到 Block Editor 的 wrapper（與 iframe canvas body），讓「只在前台才有的外層 wrapper class」對應的 CSS 在後台編輯時也能生效。"
+
+msgid "Currently active:"
+msgstr "目前生效的 class："
+
+msgid "(none)"
+msgstr "（無）"
+
+msgid "Detected candidates"
+msgstr "自動偵測到的候選"
+
+msgid "Re-detect now"
+msgstr "立即重新偵測"
+
+msgid "These classes were auto-detected from your existing posts and pages. Tick the ones you want applied to the editor preview."
+msgstr "下列 class 是從你目前的文章與頁面內容中自動掃描出來的。勾選你想在後台預覽時套用的項目即可，不需要手動輸入。"
+
+msgid "No candidates detected. Use the \"Custom classes\" field below."
+msgstr "沒有偵測到候選項目，請使用下方「自訂 class」欄位手動填入。"
+
+msgid "Use"
+msgstr "套用"
+
+msgid "Class"
+msgstr "CSS Class"
+
+msgid "Source"
+msgstr "來源"
+
+msgid "Used in posts"
+msgstr "出現於"
+
+msgid "(built-in)"
+msgstr "（WordPress 內建）"
+
+msgid "%d post"
+msgid_plural "%d posts"
+msgstr[0] "%d 篇"
+
+msgid "Custom classes (advanced)"
+msgstr "自訂 class（進階）"
+
+msgid "Add any extra classes the scanner missed. One per line, without the leading dot."
+msgstr "如果掃描器沒抓到你需要的 class，可在這裡手動加。一行一個，不要前面的「.」。"
+
+msgid "Save changes"
+msgstr "儲存設定"
+
+msgid "e.g. my-page-design"
+msgstr "範例：my-page-design"
+
+msgid "When this plugin helps"
+msgstr "什麼情況下會用到這個外掛"
+
+msgid "Block builders (GreenShift / GL Page Builder) that inject a wrapper class on the frontend only"
+msgstr "使用 GreenShift / GL Page Builder 等區塊建構器，wrapper class 只在前台才會被自動加上"
+
+msgid "Pages where CSS is scoped under .your-page-name to avoid polluting the global stylesheet"
+msgstr "頁面 CSS 用 .your-page-name 包起來作為作用域（避免污染整站樣式）"
+
+msgid "Themes that switch design via a body class which the editor doesn't replicate"
+msgstr "主題在前台用 body class 切換設計風格，但編輯器中 body 沒有這個 class"
+
+msgid "Style Manager root class"
+msgstr "Style Manager 的根作用域 class（GreenShift）"
+
+msgid "Inline <style> root selector"
+msgstr "內嵌 <style> 的最外層選擇器"
+
+msgid "WordPress core"
+msgstr "WordPress 核心內建"

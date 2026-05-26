@@ -1,0 +1,17 @@
+# Build artifacts
+outputs/
+*.zip
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Internal dev only (not for public repo)
+.dev/
+tests/
+DEVELOPMENT.md
+
+# Compiled translation (regenerate from .po with wp i18n make-mo)
+lang/*.mo
