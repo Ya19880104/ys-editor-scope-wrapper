@@ -1,58 +1,58 @@
 # Changelog
 
-本檔案紀錄 YS Editor Scope Wrapper 的版本變更。
+> 中文版本: [CHANGELOG.zh-TW.md](CHANGELOG.zh-TW.md)
 
-格式參考 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.1.0/)，版本管理採用 [Semantic Versioning](https://semver.org/lang/zh-TW/)。
+Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semantic Versioning](https://semver.org/).
 
 ## [1.1.2] - 2026-05-26
 
 ### Fixed
 
-- **「設定已儲存。」notice 顯示兩次** — 改用 PRG (Post-Redirect-Get) pattern：save handler 直接 `wp_safe_redirect` 到 `?ys_scope_message=saved`，render 端讀 query 印一次 notice。同步移除 `add_settings_error` + `settings_errors()`。
-- **textarea placeholder `&#10;` 沒解析成換行** — HTML placeholder 屬性本來就不支援多行（HTML spec），改成單行範例字串 `e.g. my-page-design`。
+- **"Settings saved." notice appearing twice** — switched to PRG (Post-Redirect-Get) pattern: the save handler now `wp_safe_redirect`s to `?ys_scope_message=saved` and the render side reads the query string to print the notice exactly once. Removed `add_settings_error` + `settings_errors()`.
+- **textarea placeholder `&#10;` not parsed as newline** — HTML `placeholder` attributes do not support multi-line per spec; replaced with a single-line example string `e.g. my-page-design`.
 
 ## [1.1.1] - 2026-05-26
 
 ### Fixed
 
-- **偵測雜訊太多**：原本掃所有 `dynamicGClasses[].value` 與 `<style>` 內所有 `.classname {` selector，會把 sub-element class（.btn、.hero__title、.work__media...）一起列出，user 看了反而更困惑
-- 現在只抓「**根作用域 class**」：Style Manager block 的 `dynamicGClasses[0]`（第一個）+ wp:html `<style>` 的**第一個** selector
-- Source 標籤改為 `stylemanager-root` / `inline-style-root` 更精確反映用途
-- `alignfull` / `alignwide` 加上 `sample_post` 記錄
+- **Detection too noisy** — v1.1.0 scanned every `dynamicGClasses[].value` and every `.classname {` selector inside `<style>` blocks, so sub-element classes (`.btn`, `.hero__title`, `.work__media`, ...) flooded the candidates list. Users found it harder, not easier, to choose.
+- Now extracts **root scope classes only**: the first `dynamicGClasses` entry of each Style Manager block + the first selector of each `wp:html <style>` block.
+- Source labels updated to `stylemanager-root` / `inline-style-root` to better reflect intent.
+- `alignfull` / `alignwide` now record a `sample_post` reference for traceability.
 
 ## [1.1.0] - 2026-05-26
 
 ### Added
 
-- **自動偵測候選 class**：掃描所有已發布的 page/post，找出 GreenShift Style Manager 的 `dynamicGClasses` value、`wp:html` 內 `<style>` 區塊的最外層 selector、以及 WordPress 核心的 `alignfull` / `alignwide`
-- **Checkbox UI**：使用者直接勾選要套用的 class，不用手寫
-- **Source 標籤**：每個候選顯示來源（Style Manager / Inline style / WordPress core）與出現頁數
-- **「立即重新偵測」按鈕**：手動清掉 transient cache 重新掃描
-- **save_post hook 自動清 cache**：新增/編輯文章後候選清單自動更新
-- **完整 i18n**：所有字串走 `__()`，英文為來源，附 `lang/ys-editor-scope-wrapper-zh_TW.po`
-- **`includes/detector.php`** 新檔案，職責分離
+- **Auto-detection of candidate classes**: scans all published pages/posts for GreenShift Style Manager `dynamicGClasses`, top-level selectors inside `wp:html <style>` blocks, and the WordPress core `alignfull` / `alignwide`.
+- **Checkbox UI**: tick to enable rather than typing class names by hand.
+- **Source labels**: each candidate shows where it was detected (Style Manager / inline style / WordPress core) and how many posts it appears in.
+- **"Re-detect now"** button: manually clears the transient cache and rescans.
+- **save_post hook**: auto-clears the detection cache so newly added classes show up next time you visit Settings.
+- **Full i18n**: all strings wrapped in `__()` with English as source; ships with `lang/ys-editor-scope-wrapper-zh_TW.po`.
+- New `includes/detector.php` for separation of concerns.
 
 ### Changed
 
-- 設定 UI 從「單純 textarea」改為「checkbox 候選 + textarea 進階」雙層
-- 儲存採自訂 POST handler（兩個欄位合併為一個 option），非 Settings API
-- 預設字串改英文（textdomain `ys-editor-scope-wrapper`），中文走 `.mo` 翻譯
+- Settings UI went from "single textarea" to "checkbox candidates + advanced textarea".
+- Save handler now custom POST (not Settings API) to merge the two input modes into one option.
+- Source strings switched to English (text domain `ys-editor-scope-wrapper`); Chinese loads via `.mo`.
 
 ### Migration notes
 
-- v1.0.0 的 option key `ys_editor_scope_classes` 仍沿用，**升級不需重新設定**
-- 升級後候選清單會自動列出當前使用的 class，勾選狀態反映現有 option
+- v1.0.0's `ys_editor_scope_classes` option key is preserved — **upgrading requires no reconfiguration**.
+- After upgrade, the candidates list will show your currently active classes pre-ticked.
 
 ## [1.0.0] - 2026-05-26
 
 ### Added
 
-- 初版發布
-- 設定頁可維護 class 清單
-- JS 同時支援 iframe canvas 與 `.editor-styles-wrapper`
-- MutationObserver 處理 iframe lazy load
-- register_activation_hook 寫入預設值（v5-page、alignfull）
+- First release.
+- Settings page lets you maintain the class list.
+- JS supports both iframe canvas and `.editor-styles-wrapper` modes of the Block Editor.
+- `MutationObserver` handles iframe lazy load.
+- `register_activation_hook` writes defaults (`v5-page`, `alignfull`).
 
 ### Background
 
-從 mu-plugin `ys-editor-v5page-wrapper.php`（dev-ysdesign 案例）升級成正式外掛。
+Upgraded from a mu-plugin (`ys-editor-v5page-wrapper.php`, dev-ysdesign case) into a full plugin.
